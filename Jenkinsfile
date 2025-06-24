@@ -2,13 +2,13 @@ pipeline {
     agent any
 
     environment {
-        IMAGE_NAME = 'umamahesh571/evolve-ecommerce'
+        IMAGE_NAME = 'manoharmattepu/evolve-ecommerce'
     }
 
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: 'https://github.com/umamahesh571/jenkins-k8s-integration.git'
+                git branch: 'main', url: 'https://github.com/Manohar-mattepu/jenkins-k8s-integration.git'
             }
         }
 
@@ -20,7 +20,7 @@ pipeline {
 
         stage('Docker Build & Push') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                withCredentials([usernamePassword(credentialsId: 'manoharmattepu', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                     sh '''
                         docker build -t $IMAGE_NAME .
                         echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
